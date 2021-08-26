@@ -1,0 +1,30 @@
+{
+    "name": "ancientworks/artifact",
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "AncientWorks",
+            "email": "mail@ancient.works",
+            "homepage": "https://github.com/ancientworks"
+        }
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4|^8.0",
+        "catfan/medoo": "^2.1",
+        "composer/semver": "^3.2",
+        "league/plates": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "AncientWorks\\Artifact\\": "src/",
+            "AncientWorks\\Artifact\\Modules\\": "Modules/"
+        }
+    }
+}
