@@ -2,6 +2,8 @@
 
 namespace AncientWorks\Artifact;
 
+use AncientWorks\Artifact\Utils\Template;
+
 /**
  * @package AncientWorks\Artifact
  * @since 0.0.1
@@ -20,6 +22,7 @@ class Admin
 		});
 
 		add_action('admin_menu', [$this, 'admin_menu']);
+
 	}
 
 	public function admin_menu()
@@ -32,7 +35,7 @@ class Admin
 				'Artifact',
 				$capability,
 				Artifact::$slug,
-				fn () => null,
+				[$this, 'plugin_page'],
 				'data:image/svg+xml;base64,' . base64_encode(@file_get_contents(dirname(ARTIFACT_FILE) . '/dist/img/artifact.svg')),
 				100
 			);
@@ -43,8 +46,14 @@ class Admin
 
 	public function init_hooks(): void
 	{
+		add_filter('admin_body_class', fn($classes) => $classes . ' jetpack-disconnected jetpack-pagestyles');
+
 		add_action('admin_enqueue_scripts', function () {
 			wp_enqueue_style('artifact-jetpack-components');
 		});
+	}
+
+	public function plugin_page() {
+		// echo Template::template()->render('pages/admin/dashboard');
 	}
 }

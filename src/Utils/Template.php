@@ -20,6 +20,8 @@ class Template
     protected function __construct()
     {
         self::$templates = new Engine(dirname(ARTIFACT_FILE) . '/templates');
+
+        self::$templates->registerFunction('asset', fn ($string) => plugins_url("/dist/{$string}", ARTIFACT_FILE));
     }
 
     public static function getInstance(): Template

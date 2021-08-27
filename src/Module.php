@@ -20,9 +20,19 @@ abstract class Module
     {
         $this->load_templates();
 
+        $this->register();
+
         if (!ModuleProvider::is_enabled(static::$module_id)) {
             return;
         }
+    }
+
+    public function register()
+    {
+    }
+
+    public function boot()
+    {
     }
 
     public function load_templates()

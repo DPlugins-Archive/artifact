@@ -26,8 +26,14 @@ class ModuleProvider
         foreach (self::$modules as $module) {
             if (class_exists($module)) {
                 $m = new $module;
-                self::$container[$m::$module_id] = $m;
+                if (self::is_enabled($m::$module_id)) {
+                    self::$container[$m::$module_id] = $m;
+                }
             }
+        }
+
+        foreach (self::$container as $key => $module) {
+            $module->boot();
         }
     }
 
