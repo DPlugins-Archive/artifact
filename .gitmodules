@@ -1,0 +1,9 @@
+[submodule "Modules/OxygenUnloader"]
+	path = Modules/OxygenUnloader
+	url = https://github.com/ancientworks/artifact-module-oxygen-unloader.git
+[submodule "Modules/OxygenSandbox"]
+	path = Modules/OxygenSandbox
+	url = https://github.com/ancientworks/artifact-module-oxygen-sandbox.git
+[submodule "Modules/OxygenCollaboration"]
+	path = Modules/OxygenCollaboration
+	url = https://github.com/ancientworks/artifact-module-oxygen-collaboration.git
