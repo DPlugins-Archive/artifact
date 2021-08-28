@@ -13,12 +13,25 @@ class Artifact
     public static $version;
     public static $slug = 'artifact';
 
+    public static $updater;
+
     public function __construct($version)
     {
         self::$version = $version;
 
         register_activation_hook(ARTIFACT_FILE, [$this, 'plugin_activate']);
         register_deactivation_hook(ARTIFACT_FILE, [$this, 'plugin_deactivate']);
+
+        self::$updater = new PluginUpdater(self::$slug, [
+            'version'     => self::$version,
+            'license'     => get_option(self::$slug . "_license_key"),
+            'beta'        => get_option(self::$slug . "_beta"),
+            'plugin_file' => ARTIFACT_FILE,
+            'item_id'     => 1,
+            'store_url'   => 'https://ancient.works',
+            'author'      => 'ancientworks',
+            'is_require_license' => false,
+        ]);
 
         ModuleProvider::loader();
 
@@ -36,21 +49,10 @@ class Artifact
 
     protected static function plugin_update()
     {
-        $updater = new PluginUpdater(self::$slug, [
-            'version'     => self::$version,
-            'license'     => get_option(self::$slug . "_license_key"),
-            'beta'        => get_option(self::$slug . "_beta"),
-            'plugin_file' => ARTIFACT_FILE,
-            'item_id'     => 1,
-            'store_url'   => 'https://ancient.works',
-            'author'      => 'ancientworks',
-            'is_require_license' => false,
-        ]);
-
-        if ($updater->isActivated()) {
+        if (self::$updater->isActivated()) {
             $doing_cron = defined('DOING_CRON') && DOING_CRON;
             if (!(current_user_can('manage_options') && $doing_cron)) {
-                $updater->ignite();
+                self::$updater->ignite();
             }
         }
     }

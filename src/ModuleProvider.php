@@ -10,14 +10,42 @@ namespace AncientWorks\Artifact;
  */
 class ModuleProvider
 {
+    /**
+     * The Fully qualified name main class of all artifact's modules
+     * @var string[]
+     */
     public static $modules = [
         \AncientWorks\Artifact\Modules\OxygenUnloader\Unloader::class,
-        \AncientWorks\Artifact\Modules\Sandbox\Sandbox::class,
+        \AncientWorks\Artifact\Modules\OxygenSandbox\Sandbox::class,
+        \AncientWorks\Artifact\Modules\OxygenCollaboration\Collaboration::class,
+        \AncientWorks\Artifact\Modules\OxygenCopyPaste\CopyPaste::class,
+        \AncientWorks\Artifact\Modules\OxygenMoveWithArrow\MoveWithArrow::class,
     ];
 
+    /**
+     * All enabled modules as defined on WordPress's option `artifact_module_enabled`
+     * @var array
+     */
     public static $enabled = [];
 
+    /**
+     * Instance of all enabled and loaded modules's class
+     * @var array
+     */
     public static $container = [];
+
+    /**
+     * Instance of all disabled and loaded modules's class
+     * @var array
+     */
+    public static $shadow = [];
+
+    /**
+     * 
+     * All artifact's modules maps
+     * @var array
+     */
+    public static $available = [];
 
     public static function loader()
     {
@@ -26,9 +54,20 @@ class ModuleProvider
         foreach (self::$modules as $module) {
             if (class_exists($module)) {
                 $m = new $module;
+
                 if (self::is_enabled($m::$module_id)) {
                     self::$container[$m::$module_id] = $m;
+                } else {
+                    self::$shadow[$m::$module_id] = $m;
                 }
+
+                self::$available[$m::$module_id] = [
+                    'enabled' => self::is_enabled($m::$module_id),
+                    'fqcn' => $module,
+                    'version' => $m::$module_version,
+                    'id' => $m::$module_id,
+                    'name' => $m::$module_name,
+                ];
             }
         }
 

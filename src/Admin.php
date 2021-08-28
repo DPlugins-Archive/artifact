@@ -2,7 +2,8 @@
 
 namespace AncientWorks\Artifact;
 
-use AncientWorks\Artifact\Utils\Template;
+use AncientWorks\Artifact\Admin\DashboardController;
+use AncientWorks\Artifact\Admin\ModuleController;
 
 /**
  * @package AncientWorks\Artifact
@@ -15,8 +16,10 @@ class Admin
 	public function __construct()
 	{
 		add_action('admin_enqueue_scripts', function () {
+			wp_register_style('artifact-jetpack-admin', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/css/jetpack-admin.min.css');
 			wp_register_style('artifact-jetpack-dops', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/_inc/build/admin.css');
 			wp_register_style('artifact-jetpack-components', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/_inc/build/style.min.css', [
+				'artifact-jetpack-admin',
 				'artifact-jetpack-dops'
 			]);
 		});
@@ -35,7 +38,7 @@ class Admin
 				'Artifact',
 				$capability,
 				Artifact::$slug,
-				[$this, 'plugin_page'],
+				[$this, 'route'],
 				'data:image/svg+xml;base64,' . base64_encode(@file_get_contents(dirname(ARTIFACT_FILE) . '/dist/img/artifact.svg')),
 				100
 			);
@@ -46,14 +49,43 @@ class Admin
 
 	public function init_hooks(): void
 	{
-		add_filter('admin_body_class', fn($classes) => $classes . ' jetpack-disconnected jetpack-pagestyles');
+		add_filter('admin_body_class', function ($classes) {
+			$classes .= ' jetpack-disconnected jetpack-pagestyles';
+			
+			if (isset($_REQUEST['route']) && $_REQUEST['route'] === 'modules') {
+				$classes .= ' admin_page_jetpack_modules';
+			}
+
+			return $classes;
+		} );
+			
 
 		add_action('admin_enqueue_scripts', function () {
 			wp_enqueue_style('artifact-jetpack-components');
 		});
 	}
 
-	public function plugin_page() {
-		// echo Template::template()->render('pages/admin/dashboard');
+	public function route() {
+		$route = $_REQUEST['route'] ?? 'dashboard';
+		switch ($route) {
+			case 'about':
+				# code...
+				break;
+
+			case 'modules':
+				# code...
+				(new ModuleController)();
+				break;
+
+			case 'settings':
+				# code...
+				break;
+
+			case 'dashboard':
+			default:
+				# code...
+				(new DashboardController)();
+				break;
+		}
 	}
 }

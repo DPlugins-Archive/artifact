@@ -15,10 +15,11 @@ abstract class Module
 {
     public static $module_id;
     public static $module_version;
+    public static $module_name = false;
 
     public function __construct()
     {
-        $this->load_templates();
+        $this->load_template_folders();
 
         $this->register();
 
@@ -35,7 +36,7 @@ abstract class Module
     {
     }
 
-    public function load_templates()
+    public function load_template_folders()
     {
         $this->load_template_extentions();
 

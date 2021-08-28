@@ -66,8 +66,8 @@ defined('ABSPATH') || exit; ?>
         </div>
         <div class="jp-masthead__nav">
             <span class="dops-button-group">
-                <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'dashboard'], admin_url('admin.php')) ?>" type="button" class="dops-button is-compact is-primary">Dashboard</a>
-                <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'settings'], admin_url('admin.php')) ?>" type="button" class="dops-button is-compact">Settings</a>
+                <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'dashboard'], admin_url('admin.php')) ?>" type="button" class="dops-button is-compact <?= !isset($_REQUEST['route']) || $_REQUEST['route'] === 'dashboard' ? 'is-primary' : '' ?>">Dashboard</a>
+                <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'settings'], admin_url('admin.php')) ?>" type="button" class="dops-button is-compact <?= isset($_REQUEST['route']) && $_REQUEST['route'] === 'settings' ? 'is-primary' : '' ?>">Settings</a>
             </span>
         </div>
     </div>
