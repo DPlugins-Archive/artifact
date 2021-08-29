@@ -35,18 +35,6 @@ $_beta        = get_option(Artifact::$slug . "_beta");
               </ul>
             </div>
           </div>
-          <div class="is-expanded-to-container dops-search" role="search">
-            <div role="button" class="dops-search__icon-navigation" tabindex="0" aria-controls="dops-search-component-1" aria-label="Open Search">
-              <svg class="gridicon gridicons-search dops-search__open-icon" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <g>
-                  <path d="M21 19l-5.154-5.154C16.574 12.742 17 11.42 17 10c0-3.866-3.134-7-7-7s-7 3.134-7 7 3.134 7 7 7c1.42 0 2.742-.426 3.846-1.154L19 21l2-2zM5 10c0-2.757 2.243-5 5-5s5 2.243 5 5-2.243 5-5 5-5-2.243-5-5z"></path>
-                </g>
-              </svg>
-            </div>
-            <div class="dops-search__input-fade">
-              <input type="search" id="dops-search-component-1" class="dops-search__input" placeholder="Search for a Jetpack feature." role="searchbox" aria-hidden="true" autocapitalize="none" value="">
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -14,6 +14,10 @@ WIP
   </a>
 
   <a href="https://github.com/ancientworks/artifact/releases/latest">
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/ancientworks/artifact/total?style=flat-square" />
+  </a>
+
+  <a href="https://github.com/ancientworks/artifact/releases/latest">
     <img alt="GitHub release" src="https://img.shields.io/github/v/release/ancientworks/artifact.svg?style=flat-square" />
   </a>
 
@@ -40,9 +44,9 @@ However, the amount of effort needed to maintain and develop new features and pr
 
 <div align="center">
 
-[![Sponsor on GitHub](https://img.shields.io/static/v1?label=sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/suabahasa)
 [![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/joshuasiagian)
 [![Sponsor on Ko-Fi](https://img.shields.io/badge/sponsor-kofi-orange.svg?style=flat-square&logo=kofi)](https://ko-fi.com/suabahasa)
+[![Sponsor on GitHub](https://img.shields.io/static/v1?label=sponsor&message=%E2%9D%A4&logo=GitHub)](https://github.com/sponsors/suabahasa)
 [![Sponsor on Patreon](https://img.shields.io/badge/sponsor-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/suabahasa)
 
 </div>

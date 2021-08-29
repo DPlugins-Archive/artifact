@@ -3,7 +3,6 @@
 namespace AncientWorks\Artifact\Admin;
 
 use AncientWorks\Artifact\Artifact;
-use AncientWorks\Artifact\ModuleProvider;
 use AncientWorks\Artifact\Utils\Notice;
 use AncientWorks\Artifact\Utils\Template;
 use AncientWorks\Artifact\Utils\Utils;
@@ -25,7 +24,7 @@ class SettingController
         ) {
             $handled = $this->action();
             if ($handled) {
-                return $handled;
+                Utils::redirect($_SERVER['HTTP_REFERER']);
             }
         }
 
@@ -36,7 +35,8 @@ class SettingController
     {
         switch ($_REQUEST['action']) {
             case 'save_license':
-                return $this->handleSaveLicense();
+                $this->handleSaveLicense();
+                return true;
                 break;
 
             default:
@@ -57,7 +57,7 @@ class SettingController
                 if (!empty($stored_license)) {
                     Artifact::$updater->deactivate();
                     update_option(Artifact::$slug . "_license_key", null);
-    
+
                     return Notice::success('Plugin license key de-activated successfully');
                 }
             } else {
@@ -78,8 +78,6 @@ class SettingController
             }
         }
 
-
         Notice::success('Setting saved!');
-
     }
 }

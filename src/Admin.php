@@ -14,6 +14,9 @@ use AncientWorks\Artifact\Admin\SettingController;
  */
 class Admin
 {
+	public static $enqueue_styles = [];
+	public static $enqueue_scripts = [];
+
 	public function __construct()
 	{
 		add_action('admin_enqueue_scripts', function () {
@@ -26,7 +29,6 @@ class Admin
 		});
 
 		add_action('admin_menu', [$this, 'admin_menu']);
-
 	}
 
 	public function admin_menu()
@@ -52,21 +54,38 @@ class Admin
 	{
 		add_filter('admin_body_class', function ($classes) {
 			$classes .= ' jetpack-disconnected jetpack-pagestyles';
-			
+
 			if (isset($_REQUEST['route']) && $_REQUEST['route'] === 'modules') {
 				$classes .= ' admin_page_jetpack_modules';
 			}
 
 			return $classes;
-		} );
-			
+		});
 
 		add_action('admin_enqueue_scripts', function () {
 			wp_enqueue_style('artifact-jetpack-components');
 		});
+
+		$route = $_REQUEST['route'] ?? 'dashboard';
+		switch ($route) {
+			case 'dashboard':
+				add_action('admin_enqueue_scripts', function () {
+					foreach (self::$enqueue_styles as $style) {
+						wp_enqueue_style($style);
+					}
+					foreach (self::$enqueue_scripts as $script) {
+						wp_enqueue_script($script);
+					}
+				});
+				break;
+			default:
+
+				break;
+		}
 	}
 
-	public function route() {
+	public function route()
+	{
 		$route = $_REQUEST['route'] ?? 'dashboard';
 		switch ($route) {
 			case 'about':
@@ -74,18 +93,15 @@ class Admin
 				break;
 
 			case 'modules':
-				# code...
 				(new ModuleController)();
 				break;
 
 			case 'settings':
-				# code...
 				(new SettingController)();
 				break;
 
 			case 'dashboard':
 			default:
-				# code...
 				(new DashboardController)();
 				break;
 		}

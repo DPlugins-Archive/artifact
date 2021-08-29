@@ -2,7 +2,6 @@
 
 namespace AncientWorks\Artifact\Admin;
 
-use AncientWorks\Artifact\Artifact;
 use AncientWorks\Artifact\ModuleProvider;
 use AncientWorks\Artifact\Utils\Notice;
 use AncientWorks\Artifact\Utils\Template;
@@ -16,12 +15,6 @@ use AncientWorks\Artifact\Utils\Utils;
  */
 class ModuleController
 {
-    public $module_admin_page_url;
-    public function __construct()
-    {
-        $this->module_admin_page_url = add_query_arg(['page' => Artifact::$slug, 'route' => 'modules'], admin_url('admin.php'));
-    }
-
     public function __invoke()
     {
         if (
@@ -74,7 +67,7 @@ class ModuleController
 
         Notice::success("Module <b>{$_REQUEST['module_id']}</b> activated");
 
-        Utils::redirect($this->module_admin_page_url);
+        Utils::redirect($_SERVER['HTTP_REFERER']);
     }
 
     protected function handleDeactivate()
@@ -94,6 +87,6 @@ class ModuleController
 
         Notice::success("Module <b>{$_REQUEST['module_id']}</b> deactivated");
         
-        Utils::redirect($this->module_admin_page_url);
+        Utils::redirect($_SERVER['HTTP_REFERER']);
     }
 }
