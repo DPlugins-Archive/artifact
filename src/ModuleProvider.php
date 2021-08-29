@@ -101,4 +101,16 @@ class ModuleProvider
 
         return false;
     }
+
+    public static function enable_module(string $module_id)
+    {
+        self::$enabled[$module_id] = true;
+        update_option('artifact_module_enabled', self::$enabled);
+    }
+
+    public static function disable_module(string $module_id)
+    {
+        unset(self::$enabled[$module_id]);
+        update_option('artifact_module_enabled', self::$enabled);
+    }
 }

@@ -22,4 +22,14 @@ class Utils
     {
         return Template::template();
     }
+
+    public static function redirect($location)
+    {
+        if (headers_sent() === false) {
+            wp_redirect($location);
+        } else {
+            echo '<meta http-equiv="refresh" content="0;url='.$location.'">';
+        }
+        exit;
+    }
 }
