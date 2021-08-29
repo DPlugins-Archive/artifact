@@ -4,6 +4,7 @@ namespace AncientWorks\Artifact\Admin;
 
 use AncientWorks\Artifact\Artifact;
 use AncientWorks\Artifact\ModuleProvider;
+use AncientWorks\Artifact\Utils\Notice;
 use AncientWorks\Artifact\Utils\Template;
 use AncientWorks\Artifact\Utils\Utils;
 
@@ -71,6 +72,8 @@ class ModuleController
             ModuleProvider::enable_module($_REQUEST['module_id']);
         }
 
+        Notice::success("Module <b>{$_REQUEST['module_id']}</b> activated");
+
         Utils::redirect($this->module_admin_page_url);
     }
 
@@ -88,6 +91,8 @@ class ModuleController
         if (ModuleProvider::$container[$_REQUEST['module_id']]->deactivate()) {
             ModuleProvider::disable_module($_REQUEST['module_id']);
         }
+
+        Notice::success("Module <b>{$_REQUEST['module_id']}</b> deactivated");
         
         Utils::redirect($this->module_admin_page_url);
     }

@@ -18,7 +18,7 @@ defined('ABSPATH') || exit; ?>
             <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'about'], admin_url('admin.php')) ?>" class="jp-footer__link" title="About Artifact">About</a>
         </li>
         <li class="jp-footer__link-item">
-            <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'modules'], admin_url('admin.php')) ?>" title="Access the full list of Artifact modules available on your site." class="jp-footer__link">Modules</a>
+            <a href="<?= add_query_arg(['page' => Artifact::$slug, 'route' => 'modules'], admin_url('admin.php')) ?>" title="Access the full list of Artifact's modules available on your site." class="jp-footer__link">Modules</a>
         </li>
     </ul>
 </div>

@@ -3,6 +3,7 @@
 namespace AncientWorks\Artifact;
 
 use AncientWorks\Artifact\Utils\EDD_SL_Plugin_Updater;
+use AncientWorks\Artifact\Utils\Notice;
 
 /**
  * @package AncientWorks\Artifact
@@ -28,7 +29,7 @@ class PluginUpdater {
 
 		if ( ! $license && empty( $this->payload['license'] ) ) {
 			if ( array_key_exists( 'is_require_license', $this->payload ) && $this->payload['is_require_license'] ) {
-				// Notice::error( 'Enter your license key to get update', $this->plugin_id );
+				Notice::error( 'Enter your license key to get update' );
 			}
 
 			return false;
@@ -36,10 +37,10 @@ class PluginUpdater {
 
 		if ( $license ) {
 			if ( $license->license !== 'valid' ) {
-				// Notice::error( [
-				// 	'Enter your license key to get update',
-				// 	$this->errorMessage( $license->license )
-				// ], $this->plugin_id );
+				Notice::adds(Notice::ERROR, [
+					'Enter your license key to get update',
+					$this->errorMessage( $license->license )
+				] );
 
 				return false;
 			}
@@ -50,7 +51,7 @@ class PluginUpdater {
 		$response = $this->apiRequest( 'check_license' );
 
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			// Notice::error( is_wp_error( $response ) ? $response->get_error_message() : 'An Updater error occurred, please try again.', $this->plugin_id );
+			Notice::error( is_wp_error( $response ) ? $response->get_error_message() : 'An Updater error occurred, please try again.' );
 
 			return false;
 		}
@@ -59,7 +60,7 @@ class PluginUpdater {
 
 		if ( $license_data->success === false ) {
 			if ( property_exists( $license_data, 'error' ) ) {
-				// Notice::error( self::errorMessage( $license_data->error ), $this->plugin_id );
+				Notice::error( self::errorMessage( $license_data->error ) );
 			}
 
 			return false;

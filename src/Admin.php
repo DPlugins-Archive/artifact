@@ -4,6 +4,7 @@ namespace AncientWorks\Artifact;
 
 use AncientWorks\Artifact\Admin\DashboardController;
 use AncientWorks\Artifact\Admin\ModuleController;
+use AncientWorks\Artifact\Admin\SettingController;
 
 /**
  * @package AncientWorks\Artifact
@@ -79,6 +80,7 @@ class Admin
 
 			case 'settings':
 				# code...
+				(new SettingController)();
 				break;
 
 			case 'dashboard':
