@@ -86,7 +86,7 @@ class ModuleController
         }
 
         Notice::success("Module <b>{$_REQUEST['module_id']}</b> deactivated");
-        
+
         Utils::redirect($_SERVER['HTTP_REFERER']);
     }
 }

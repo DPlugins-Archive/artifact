@@ -2,6 +2,8 @@
 
 namespace AncientWorks\Artifact;
 
+use AncientWorks\Artifact\Utils\Utils;
+
 /**
  * @package AncientWorks\Artifact
  * @since 0.0.1
@@ -40,6 +42,10 @@ class Artifact
         new Admin;
 
         add_action('init', [$this, 'init']);
+
+        add_filter('plugin_action_links_' . plugin_basename(ARTIFACT_FILE), function ($links) {
+            return Utils::plugin_action_links($links);
+        });
     }
 
     public function init()

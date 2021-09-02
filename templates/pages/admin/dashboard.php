@@ -51,11 +51,18 @@ defined('ABSPATH') || exit; ?>
       </div>
 
       <div class="jp-at-a-glance__item-grid glance__grid">
-        <?php foreach (DashboardController::$panel as $key => $grid) : ?>
-          <?php if ($grid['size'] !== 'grid') continue; ?>
-          <?php $this->insert($grid['panel_template']) ?>
+        <?php foreach (DashboardController::$panel as $key => $panel) : ?>
+          <?php if ($panel['size'] !== 'grid') continue; ?>
+          <?php $this->insert($panel['panel_template']) ?>
         <?php endforeach; ?>
       </div>
+    </div>
+
+    <div class="jp-at-a-glance">
+      <?php foreach (DashboardController::$panel as $key => $panel) : ?>
+        <?php if ($panel['size'] !== 'full') continue; ?>
+        <?php $this->insert($panel['panel_template']) ?>
+      <?php endforeach; ?>
     </div>
   </div>
 </div>

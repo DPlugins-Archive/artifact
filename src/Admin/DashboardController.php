@@ -38,7 +38,7 @@ class DashboardController
                 Utils::redirect($_SERVER['HTTP_REFERER']);
             }
         }
-        
+
         echo Template::template()->render('pages/admin/dashboard');
     }
 }

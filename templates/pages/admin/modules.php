@@ -108,13 +108,13 @@ defined('ABSPATH') || exit; ?>
                     <input type="checkbox">
                   </th>
                   <td class="name column-name">
-                    <span class="info"><a href="https://ancient.works/redirect/artifact" target="blank">Get more modules ... <code> Pro version </code></a>  </span>
+                    <span class="info"><a href="https://ancient.works/redirect/artifact" target="blank">Get more modules ... <code> Pro version </code></a> </span>
                     <div class="row-actions">
                       <span class="unavailable_reason">module not installed</span>
                     </div>
                   </td>
                 </tr>
-              <?php endif;?>
+              <?php endif; ?>
               <?php foreach (ModuleProvider::$available as $module) : ?>
                 <tr class="jetpack-module <?= $module['enabled'] ? 'active' : '' ?>" id="<?= $module['id'] ?>">
                   <th scope="row" class="check-column">

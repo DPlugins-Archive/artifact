@@ -16,16 +16,19 @@ class Admin
 {
 	public static $enqueue_styles = [];
 	public static $enqueue_scripts = [];
+	public static $localize_scripts = [];
 
 	public function __construct()
 	{
 		add_action('admin_enqueue_scripts', function () {
-			wp_register_style('artifact-jetpack-admin', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/css/jetpack-admin.min.css');
-			wp_register_style('artifact-jetpack-dops', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/_inc/build/admin.css');
-			wp_register_style('artifact-jetpack-components', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/_inc/build/style.min.css', [
-				'artifact-jetpack-admin',
-				'artifact-jetpack-dops'
+			wp_register_style('artifact/jetpack-admin', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/css/jetpack-admin.min.css');
+			wp_register_style('artifact/jetpack-dops', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/_inc/build/admin.css');
+			wp_register_style('artifact/jetpack-components', 'https://cdn.jsdelivr.net/wp/plugins/jetpack/trunk/_inc/build/style.min.css', [
+				'artifact/jetpack-admin',
+				'artifact/jetpack-dops'
 			]);
+
+			wp_register_script('artifact/dashboard', plugins_url('/dist/js/dashboard.js', ARTIFACT_FILE), [], false, true);
 		});
 
 		add_action('admin_menu', [$this, 'admin_menu']);
@@ -63,7 +66,7 @@ class Admin
 		});
 
 		add_action('admin_enqueue_scripts', function () {
-			wp_enqueue_style('artifact-jetpack-components');
+			wp_enqueue_style('artifact/jetpack-components');
 		});
 
 		$route = $_REQUEST['route'] ?? 'dashboard';
@@ -75,6 +78,15 @@ class Admin
 					}
 					foreach (self::$enqueue_scripts as $script) {
 						wp_enqueue_script($script);
+					}
+					foreach (self::$localize_scripts as $localize_script) {
+						wp_localize_script(
+							$localize_script['handle'],
+							$localize_script['object_name'],
+							(is_callable($localize_script['l10n'])
+								? call_user_func($localize_script['l10n'])
+								: $localize_script['l10n'])
+						);
 					}
 				});
 				break;

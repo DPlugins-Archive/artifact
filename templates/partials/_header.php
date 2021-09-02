@@ -62,7 +62,7 @@ defined('ABSPATH') || exit; ?>
                 </svg>
             </a>
             <code>
-                <?= $this->e(Artifact::$version) ?>
+                <?= Artifact::$version ?>
             </code>
         </div>
         <div class="jp-masthead__nav">
@@ -78,7 +78,6 @@ defined('ABSPATH') || exit; ?>
     <div id="jp-admin-notices" aria-live="polite"></div>
     <div aria-live="polite">
         <?php foreach (Notice::lists() as $notice) : ?>
-
             <div class="dops-notice is-<?= $notice['status'] ?>">
                 <span class="dops-notice__icon-wrapper">
                     <?php
@@ -127,8 +126,8 @@ defined('ABSPATH') || exit; ?>
                     </a>
                 <?php endif; ?>
             </div>
-
         <?php endforeach; ?>
+        <div id="overlay-notices" class="global-notices"></div>
 
     </div>
 </div>

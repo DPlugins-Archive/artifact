@@ -2,6 +2,7 @@
 
 namespace AncientWorks\Artifact\Utils;
 
+use AncientWorks\Artifact\Artifact;
 use League\Plates\Engine;
 use Medoo\Medoo;
 
@@ -18,18 +19,46 @@ class Utils
 		return DB::db();
 	}
 
-    public static function template(): Engine
-    {
-        return Template::template();
-    }
+	public static function template(): Engine
+	{
+		return Template::template();
+	}
 
-    public static function redirect($location)
-    {
-        if (headers_sent() === false) {
-            wp_redirect($location);
-        } else {
-            echo '<meta http-equiv="refresh" content="0;url='.$location.'">';
-        }
-        exit;
-    }
+	public static function redirect($location)
+	{
+		if (headers_sent() === false) {
+			wp_redirect($location);
+		} else {
+			echo '<meta http-equiv="refresh" content="0;url=' . $location . '">';
+		}
+		exit;
+	}
+
+	public static function is_request(string $type): bool
+	{
+		switch ($type) {
+			case 'admin':
+				return is_admin();
+			case 'ajax':
+				return defined('DOING_AJAX');
+			case 'rest':
+				return defined('REST_REQUEST');
+			case 'cron':
+				return defined('DOING_CRON');
+			case 'frontend':
+				return (!is_admin() || defined('DOING_AJAX')) && !defined('DOING_CRON');
+			default:
+				return false;
+				break;
+		}
+	}
+
+	public static function plugin_action_links($links)
+	{
+		$plugin_shortcuts = [
+			'<a href="' . add_query_arg(['page' => Artifact::$slug, 'route' => 'modules'], admin_url('admin.php')) . '"> Modules </a>',
+		];
+
+		return array_merge($links, $plugin_shortcuts);
+	}
 }
