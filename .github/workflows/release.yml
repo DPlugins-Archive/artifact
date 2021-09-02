@@ -1,0 +1,73 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+        
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-suggest
+
+      # - name: Cache pnpm modules
+      #   uses: actions/cache@v2
+      #   env:
+      #     cache-name: cache-pnpm-modules
+      #   with:
+      #     path: ~/.pnpm-store
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-${{ hashFiles('**/package.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-${{ env.cache-name }}-${{ matrix.node-version }}-
+
+      # - uses: pnpm/action-setup@v2.0.1
+      #   with:
+      #     version: 6.0.2
+      #     run_install: true
+          
+      # - name: Compile assets
+      #   run: pnpm run build
+
+      - name: Clean dev files
+        run: rm -rf .git* assets/ node_modules/ package.json pnpm-lock.yaml postcss.config.js composer.lock composer.json .wordpress-org .distignore .npmrc
+
+      - name: Move files to subfolder
+        run: mkdir zip-temp && ls | grep -v zip-temp | xargs mv -t zip-temp
+      
+      - name: rename folder
+        run: mv zip-temp ancientworks-artifact
+
+      - name: Create zip
+        uses: montudor/action-zip@v0.1.1
+        with:
+          args: zip -qq -r "ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip" . -x  .npmrc
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+
+      - name: Upload zip to release
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip

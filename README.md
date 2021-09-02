@@ -1,10 +1,6 @@
-```css
-WIP
-```
-
 <p align="center">
   <a href="https://ancient.works/artifact">
-    <img alt="Artifact" src="https://avatars.githubusercontent.com/u/89405346" height="100">
+    <img alt="Artifact" src="https://raw.githubusercontent.com/ancientworks/artifact/main/dist/img/artifact-logo-header.svg" height="100">
   </a>
 </p>
 
@@ -22,7 +18,7 @@ WIP
   </a>
 
   <a href="https://github.com/ancientworks/artifact/actions">
-    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/ancientworks/artifact/Release?style=flat-square" />
+    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/ancientworks/artifact/release?style=flat-square" />
   </a>
 </p>
 
