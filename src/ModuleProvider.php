@@ -15,11 +15,19 @@ class ModuleProvider
      * @var string[]
      */
     public static $modules = [
+        \AncientWorks\Artifact\Modules\Command\Command::class,
         \AncientWorks\Artifact\Modules\OxygenUnloader\Unloader::class,
         \AncientWorks\Artifact\Modules\OxygenSandbox\Sandbox::class,
-        \AncientWorks\Artifact\Modules\OxygenCollaboration\Collaboration::class,
         \AncientWorks\Artifact\Modules\OxygenCopyPaste\CopyPaste::class,
         \AncientWorks\Artifact\Modules\OxygenMoveWithArrow\MoveWithArrow::class,
+    ];
+
+    /**
+     * The Fully qualified name main class of all artifact's exclusive modules
+     * @var string[]
+     */
+    public static $exclusive_modules = [
+        \AncientWorks\Artifact\Modules\OxygenCollaboration\Collaboration::class,
     ];
 
     /**
@@ -49,6 +57,11 @@ class ModuleProvider
 
     public static function loader()
     {
+        self::$modules = array_merge(
+            self::$modules,
+            self::$exclusive_modules
+        );
+
         self::which_enabled();
 
         foreach (self::$modules as $module) {

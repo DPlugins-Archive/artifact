@@ -8,3 +8,6 @@
 	path = Modules/OxygenCollaboration
 	url = https://github.com/artifact-modules/oxygen-collaboration.git
 	update = none
+[submodule "Modules/Command"]
+	path = Modules/Command
+	url = https://github.com/artifact-modules/command.git

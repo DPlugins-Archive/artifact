@@ -21,6 +21,9 @@
         "composer/semver": "^3.2",
         "league/plates": "^3.4"
     },
+    "require-dev": {
+        "wp-cli/wp-cli-bundle": "*"
+    },
     "autoload": {
         "psr-4": {
             "AncientWorks\\Artifact\\": "src/",
