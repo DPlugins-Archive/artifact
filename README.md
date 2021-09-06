@@ -66,6 +66,6 @@ Those modules typically come bundled with Artifact.
 
 ### Exclusive modules
 
-Those modules available for Artifact's [subscriber](#supporting).
+Those modules available for Artifact's [subscribers](#supporting).
 
 - [`artifact-modules/oxygen-collaboration`](https://github.com/artifact-modules/oxygen-collaboration) Oxygen Editor Multi User and Multi Tab Editing Support.

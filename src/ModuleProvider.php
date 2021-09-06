@@ -2,6 +2,8 @@
 
 namespace AncientWorks\Artifact;
 
+use Symfony\Component\Finder\Finder;
+
 /**
  * @package AncientWorks\Artifact
  * @since 0.0.1
@@ -14,25 +16,10 @@ class ModuleProvider
      * The Fully qualified name main class of all artifact's modules
      * @var string[]
      */
-    public static $modules = [
-        \AncientWorks\Artifact\Modules\Command\Command::class,
-        \AncientWorks\Artifact\Modules\OxygenSandbox\Sandbox::class,
-        \AncientWorks\Artifact\Modules\OxygenUnloader\Unloader::class,
-        \AncientWorks\Artifact\Modules\OxygenCopyPaste\CopyPaste::class,
-        \AncientWorks\Artifact\Modules\OxygenMoveWithArrow\MoveWithArrow::class,
-        \AncientWorks\Artifact\Modules\OxygenGlobalSettingsJsonEditor\JsonEditor::class,
-    ];
+    public static $modules = [];
 
     /**
-     * The Fully qualified name main class of all artifact's exclusive modules
-     * @var string[]
-     */
-    public static $exclusive_modules = [
-        \AncientWorks\Artifact\Modules\OxygenCollaboration\Collaboration::class,
-    ];
-
-    /**
-     * All enabled modules as defined on WordPress's option `artifact_module_enabled`
+     * All enabled modules' id as defined on WordPress's option `artifact_module_enabled`
      * @var array
      */
     public static $enabled = [];
@@ -50,18 +37,40 @@ class ModuleProvider
     public static $shadow = [];
 
     /**
-     * 
      * All artifact's modules maps
      * @var array
      */
     public static $available = [];
 
+    public static function modules_finder()
+    {
+        $finder = new Finder();
+
+        $namespace = 'AncientWorks\Artifact\Modules';
+        $path = dirname(ARTIFACT_FILE) . DIRECTORY_SEPARATOR . 'Modules';
+
+        $finder
+            ->in($path . '/*')
+            ->files()
+            ->name('*.php')
+            ->depth('== 0');
+
+        foreach ($finder as $module) {
+            $module = $namespace . str_replace(
+                [$path, '/', '.php'],
+                ['', '\\', ''],
+                $module->getRealPath()
+            );
+
+            if (class_exists($module) && is_subclass_of($module, Module::class)) {
+                array_push(self::$modules, $module);
+            }
+        }
+    }
+
     public static function loader()
     {
-        self::$modules = array_merge(
-            self::$exclusive_modules,
-            self::$modules,
-        );
+        self::modules_finder();
 
         self::which_enabled();
 
