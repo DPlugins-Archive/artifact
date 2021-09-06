@@ -62,9 +62,10 @@ Those modules typically come bundled with Artifact.
 - [`artifact-modules/oxygen-unloader`](https://github.com/artifact-modules/oxygen-unloader) Load the Oxygen Builder plugin only for users with privilege access as defined on _Oxygen > Client Control_ setting page.
 - [`artifact-modules/oxygen-copy-paste`](https://github.com/artifact-modules/oxygen-copy-paste) Copy paste element and style on oxygen editor. [WIP]
 - [`artifact-modules/oxygen-move-with-arrow`](https://github.com/artifact-modules/oxygen-move-with-arrow) move element on oxygen editor using keyboard. [WIP]
+- [`artifact-modules/oxygen-global-settings-jsoneditor`](https://github.com/artifact-modules/oxygen-global-settings-jsoneditor) JSON editor on Oxygen _Export/Import Oxygen Options_ page.
 
 ### Exclusive modules
 
-Those modules available for Artifact's subscriber.
+Those modules available for Artifact's [subscriber](#supporting).
 
 - [`artifact-modules/oxygen-collaboration`](https://github.com/artifact-modules/oxygen-collaboration) Oxygen Editor Multi User and Multi Tab Editing Support.

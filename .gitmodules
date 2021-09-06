@@ -11,3 +11,6 @@
 [submodule "Modules/Command"]
 	path = Modules/Command
 	url = https://github.com/artifact-modules/command.git
+[submodule "Modules/OxygenGlobalSettingsJsonEditor"]
+	path = Modules/OxygenGlobalSettingsJsonEditor
+	url = https://github.com/artifact-modules/oxygen-global-settings-jsoneditor.git

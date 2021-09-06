@@ -20,6 +20,7 @@ class ModuleProvider
         \AncientWorks\Artifact\Modules\OxygenUnloader\Unloader::class,
         \AncientWorks\Artifact\Modules\OxygenCopyPaste\CopyPaste::class,
         \AncientWorks\Artifact\Modules\OxygenMoveWithArrow\MoveWithArrow::class,
+        \AncientWorks\Artifact\Modules\OxygenGlobalSettingsJsonEditor\JsonEditor::class,
     ];
 
     /**
