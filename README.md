@@ -50,3 +50,21 @@ However, the amount of effort needed to maintain and develop new features and pr
 ## About Artifact
 
 Artifact is a productivity-driven plugin with better workflow and environment.
+
+## Artifact modules
+
+### Default modules
+
+Those modules typically come bundled with Artifact.
+
+- [`artifact-modules/command`](https://github.com/artifact-modules/command) Collection of WP-CLI commands.
+- [`artifact-modules/oxygen-sandbox`](https://github.com/artifact-modules/oxygen-sandbox) Isolated environments for WordPress Visual Builder (supported: Oxygen Builder, Bricks Builder, Brizy Builder, Zion Builder).
+- [`artifact-modules/oxygen-unloader`](https://github.com/artifact-modules/oxygen-unloader) Load the Oxygen Builder plugin only for users with privilege access as defined on _Oxygen > Client Control_ setting page.
+- [`artifact-modules/oxygen-copy-paste`](https://github.com/artifact-modules/oxygen-copy-paste) Copy paste element and style on oxygen editor. [WIP]
+- [`artifact-modules/oxygen-move-with-arrow`](https://github.com/artifact-modules/oxygen-move-with-arrow) move element on oxygen editor using keyboard. [WIP]
+
+### Exclusive modules
+
+Those modules available for Artifact's subscriber.
+
+- [`artifact-modules/oxygen-collaboration`](https://github.com/artifact-modules/oxygen-collaboration) Oxygen Editor Multi User and Multi Tab Editing Support.
