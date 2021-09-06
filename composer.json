@@ -19,7 +19,8 @@
         "php": "^7.4|^8.0",
         "catfan/medoo": "^2.1",
         "composer/semver": "^3.2",
-        "league/plates": "^3.4"
+        "league/plates": "^3.4",
+        "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
         "wp-cli/wp-cli-bundle": "*"

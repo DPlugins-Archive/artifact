@@ -16,8 +16,8 @@ class ModuleProvider
      */
     public static $modules = [
         \AncientWorks\Artifact\Modules\Command\Command::class,
-        \AncientWorks\Artifact\Modules\OxygenUnloader\Unloader::class,
         \AncientWorks\Artifact\Modules\OxygenSandbox\Sandbox::class,
+        \AncientWorks\Artifact\Modules\OxygenUnloader\Unloader::class,
         \AncientWorks\Artifact\Modules\OxygenCopyPaste\CopyPaste::class,
         \AncientWorks\Artifact\Modules\OxygenMoveWithArrow\MoveWithArrow::class,
     ];
@@ -58,8 +58,8 @@ class ModuleProvider
     public static function loader()
     {
         self::$modules = array_merge(
+            self::$exclusive_modules,
             self::$modules,
-            self::$exclusive_modules
         );
 
         self::which_enabled();

@@ -2,6 +2,7 @@
 
 namespace AncientWorks\Artifact\Admin;
 
+use AncientWorks\Artifact\Artifact;
 use AncientWorks\Artifact\ModuleProvider;
 use AncientWorks\Artifact\Utils\Notice;
 use AncientWorks\Artifact\Utils\Template;
@@ -20,7 +21,7 @@ class ModuleController
         if (
             !empty($_REQUEST['action'])
             && !empty($_REQUEST['_wpnonce'])
-            && wp_verify_nonce($_REQUEST['_wpnonce'], 'artifact')
+            && wp_verify_nonce($_REQUEST['_wpnonce'], Artifact::$slug)
         ) {
             $handled = $this->action();
             if ($handled) {

@@ -2,6 +2,7 @@
 
 namespace AncientWorks\Artifact\Admin;
 
+use AncientWorks\Artifact\Artifact;
 use AncientWorks\Artifact\Utils\Template;
 use AncientWorks\Artifact\Utils\Utils;
 
@@ -31,7 +32,7 @@ class DashboardController
             && !empty($_REQUEST['module_id'])
             && array_key_exists($_REQUEST['module_id'], self::$panel)
             && !empty($_REQUEST['_wpnonce'])
-            && wp_verify_nonce($_REQUEST['_wpnonce'], 'artifact')
+            && wp_verify_nonce($_REQUEST['_wpnonce'], Artifact::$slug)
         ) {
             $handled = call_user_func(self::$panel[$_REQUEST['module_id']]['panel_handle']);
             if ($handled) {

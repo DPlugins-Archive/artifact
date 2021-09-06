@@ -20,7 +20,7 @@ class SettingController
         if (
             !empty($_REQUEST['action'])
             && !empty($_REQUEST['_wpnonce'])
-            && wp_verify_nonce($_REQUEST['_wpnonce'], 'artifact')
+            && wp_verify_nonce($_REQUEST['_wpnonce'], Artifact::$slug)
         ) {
             $handled = $this->action();
             if ($handled) {

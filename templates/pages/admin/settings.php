@@ -50,7 +50,7 @@ $_beta        = get_option(Artifact::$slug . "_beta");
                                                                                                     'route' => 'settings',
                                                                                                     'action' => 'save_license'
                                                                                                   ], admin_url('admin.php')) ?>">
-          <input type="hidden" name="_wpnonce" value="<?= wp_create_nonce('artifact') ?>">
+          <input type="hidden" name="_wpnonce" value="<?= wp_create_nonce(Artifact::$slug) ?>">
           <div class="dops-card dops-section-header is-compact">
             <div class="dops-section-header__label">
               <span class="dops-section-header__label-text">License</span>
@@ -67,7 +67,7 @@ $_beta        = get_option(Artifact::$slug . "_beta");
                   <tr>
                     <th scope="row"><label>License Key</label></th>
                     <td>
-                      <input name="license_key" type="text" value="<?= $_license_key ?>">
+                      <input name="license_key" type="password" value="<?= $_license_key ?>">
                     </td>
                   </tr>
                   <tr>

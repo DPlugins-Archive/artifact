@@ -1,0 +1,16 @@
+{
+  "name": "artifact",
+  "version": "0.0.1",
+  "description": "Oxygen Builder's better workflow and environment",
+  "repository": "https://github.com/ancientworks/artifact.git",
+  "author": "ancient-spirit <mail@ancient.works>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "Modules/*"
+  ],
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}

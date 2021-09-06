@@ -6,7 +6,6 @@ defined('ABSPATH') || exit; ?>
 
 <?php $this->layout('layouts/admin') ?>
 
-
 <style>
   .glance__grid {
     display: grid;
@@ -53,7 +52,9 @@ defined('ABSPATH') || exit; ?>
       <div class="jp-at-a-glance__item-grid glance__grid">
         <?php foreach (DashboardController::$panel as $key => $panel) : ?>
           <?php if ($panel['size'] !== 'grid') continue; ?>
-          <?php $this->insert($panel['panel_template']) ?>
+          <div id="<?= $key ?>">
+            <?php $this->insert($panel['panel_template']) ?>
+          </div>
         <?php endforeach; ?>
       </div>
     </div>
@@ -61,7 +62,9 @@ defined('ABSPATH') || exit; ?>
     <div class="jp-at-a-glance">
       <?php foreach (DashboardController::$panel as $key => $panel) : ?>
         <?php if ($panel['size'] !== 'full') continue; ?>
-        <?php $this->insert($panel['panel_template']) ?>
+        <div id="<?= $key ?>">
+          <?php $this->insert($panel['panel_template']) ?>
+        </div>
       <?php endforeach; ?>
     </div>
   </div>
