@@ -60,12 +60,17 @@ Those modules typically come bundled with Artifact.
 - [`artifact-modules/command`](https://github.com/artifact-modules/command) Collection of WP-CLI commands.
 - [`artifact-modules/oxygen-sandbox`](https://github.com/artifact-modules/oxygen-sandbox) Isolated environments for WordPress Visual Builder (supported: Oxygen Builder, Bricks Builder, Brizy Builder, Zion Builder).
 - [`artifact-modules/oxygen-unloader`](https://github.com/artifact-modules/oxygen-unloader) Load the Oxygen Builder plugin only for users with privilege access as defined on _Oxygen > Client Control_ setting page.
-- [`artifact-modules/oxygen-copy-paste`](https://github.com/artifact-modules/oxygen-copy-paste) Copy paste element and style on oxygen editor. [WIP]
-- [`artifact-modules/oxygen-move-with-arrow`](https://github.com/artifact-modules/oxygen-move-with-arrow) move element on oxygen editor using keyboard. [WIP]
 - [`artifact-modules/oxygen-global-settings-jsoneditor`](https://github.com/artifact-modules/oxygen-global-settings-jsoneditor) JSON editor on Oxygen _Export/Import Oxygen Options_ page.
+- [`artifact-modules/oxygen-conditions`](https://github.com/artifact-modules/oxygen-conditions) Collection of conditions that ready to use inside oxygen editor. [WIP]
+- [`artifact-modules/oxygen-keyboard`](https://github.com/artifact-modules/oxygen-keyboard) Oxygen editor shortcuts. [WIP]
+- [`artifact-modules/oxygen-contextual-menu`](https://github.com/artifact-modules/oxygen-contextual-menu) Contextual menu or right click on oxygen editor's DOM panel. [WIP]
+- [`artifact-modules/oxygen-colorful-editor`](https://github.com/artifact-modules/oxygen-colorful-editor) Customize the oxygen editor color schema. Make the oxygen editor yours. [WIP]
 
 ### Exclusive modules
 
 Those modules available for Artifact's [subscribers](#supporting).
 
-- [`artifact-modules/oxygen-collaboration`](https://github.com/artifact-modules/oxygen-collaboration) Oxygen Editor Multi User and Multi Tab Editing Support.
+- [`artifact-modules/oxygen-collaboration`](https://github.com/artifact-modules/oxygen-collaboration) Oxygen editor multi user and multi tab editing support.
+- [`artifact-modules/oxygen-classes-purger`](https://github.com/artifact-modules/oxygen-classes-purger) Remove unused oxygen css classes. [WIP]
+- [`artifact-modules/oxygen-copy-paste`](https://github.com/artifact-modules/oxygen-copy-paste) Copy paste element and style on oxygen editor. [WIP]
+- [`artifact-modules/oxygen-move-with-arrow`](https://github.com/artifact-modules/oxygen-move-with-arrow) Move element on oxygen editor using keyboard. [WIP]
