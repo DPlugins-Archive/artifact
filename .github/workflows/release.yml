@@ -54,7 +54,12 @@ jobs:
         run: yarn run github:actions
 
       - name: Clean development files
-        run: rm -rf *.git*  *node_modules *package.json *pnpm-lock.yaml *postcss.config.js composer.lock composer.json .wordpress-org .distignore *.npmrc
+        run: |
+          find . \( -name "*.git*" -o -name "node_modules" \) -exec rm -rf '{}' +
+        # run: |
+        #   rm -rf *.git* 
+        #   rm -rf *package.json *pnpm-lock.yaml *node_modules *postcss.config.js *.npmrc *.yarn.lock*
+        #   rm -rf composer.lock composer.json .wordpress-org .distignore 
 
       - name: Move files to subfolder
         run: mkdir zip-temp && ls | grep -v zip-temp | xargs mv -t zip-temp
