@@ -1,6 +1,9 @@
 {
     "name": "ancientworks/artifact",
     "type": "wordpress-plugin",
+    "keywords": [],
+    "homepage": "https://ancient.works/artifact",
+    "license": "MIT",
     "authors": [
         {
             "name": "AncientWorks",

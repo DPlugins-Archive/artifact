@@ -10,7 +10,6 @@
     "Modules/*"
   ],
   "scripts": {
-  },
-  "devDependencies": {
+    "github:actions": "yarn workspaces run release"
   }
 }
