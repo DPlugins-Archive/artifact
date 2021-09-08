@@ -19,7 +19,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Composer install
-        run: composer install --prefer-dist --no-interaction --no-suggest
+        run: composer install --prefer-dist --no-interaction --no-suggest --no-dev
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path

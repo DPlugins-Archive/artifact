@@ -28,7 +28,7 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Composer install
-        run: composer install --prefer-dist --no-interaction --no-suggest
+        run: composer install --prefer-dist --no-interaction --no-suggest --no-dev
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -70,13 +70,12 @@ jobs:
         with:
           args: zip -qq -r "ancientworks-artifact-full-${{ steps.get_version.outputs.VERSION }}.zip" . -x  .npmrc
 
-      - name: Upload file
-        uses: wilsonzlin/b2-upload-action@v1
-        id: upload
+      - name: B2 Upload
+        uses: wilsonzlin/b2-upload-action@v1.0.0
         with:
           bucket: ancientworks-github
           uploadKey: actions/workflow/artifact/ancientworks-artifact-full-${{ steps.get_version.outputs.VERSION }}.zip
           keyId: ${{ secrets.BACKBLAZE_B2_KEY_ID }}
           applicationKey: ${{ secrets.BACKBLAZE_B2_APPLICATION_KEY }}
-          file: ./ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
+          file: ancientworks-artifact-full-${{ steps.get_version.outputs.VERSION }}.zip
           contentType: application/zip
