@@ -1,4 +1,4 @@
-name: release
+name: Release - Full Edition
 
 on:
   push:
@@ -56,37 +56,27 @@ jobs:
       - name: Clean development files
         run: |
           find . \( -name "*.git*" -o -name "node_modules" \) -exec rm -rf '{}' +
-        # run: |
-        #   rm -rf *.git* 
-        #   rm -rf *package.json *pnpm-lock.yaml *node_modules *postcss.config.js *.npmrc *.yarn.lock*
-        #   rm -rf composer.lock composer.json .wordpress-org .distignore 
+          find . \( -name "package.json" -o -name "pnpm-lock.yaml" -o -name "yarn.lock" -o -name "postcss.config.js" -o -name ".npmrc" \) -exec rm -rf '{}' +
+          find . \( -name "composer.lock" -o -name "composer.json" -o -name ".wordpress-org" -o -name ".distignore" -o -name ".npmrc" \) -exec rm -rf '{}' +
 
       - name: Move files to subfolder
         run: mkdir zip-temp && ls | grep -v zip-temp | xargs mv -t zip-temp
       
       - name: Rename folder
-        run: mv zip-temp ancientworks-artifact
+        run: mv zip-temp ancientworks-artifact-full
 
       - name: Create zip
         uses: montudor/action-zip@v0.1.1
         with:
-          args: zip -qq -r "ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip" . -x  .npmrc
+          args: zip -qq -r "ancientworks-artifact-full-${{ steps.get_version.outputs.VERSION }}.zip" . -x  .npmrc
 
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload file
+        uses: wilsonzlin/b2-upload-action@v1
+        id: upload
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-
-      - name: Upload zip to release
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
-          asset_name: ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
-          asset_content_type: application/zip
+          bucket: ancientworks-github
+          uploadKey: actions/workflow/artifact/ancientworks-artifact-full-${{ steps.get_version.outputs.VERSION }}.zip
+          keyId: ${{ secrets.BACKBLAZE_B2_KEY_ID }}
+          applicationKey: ${{ secrets.BACKBLAZE_B2_APPLICATION_KEY }}
+          file: ./ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
+          contentType: application/zip

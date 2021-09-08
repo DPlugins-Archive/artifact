@@ -1,0 +1,81 @@
+name: Release - Lite Edition
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+        
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Composer install
+        run: composer install --prefer-dist --no-interaction --no-suggest
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+            
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+          
+      - name: Yarn install
+        run: yarn
+
+      - name: Yarn deploy
+        run: yarn run github:actions
+
+      - name: Clean development files
+        run: |
+          find . \( -name "*.git*" -o -name "node_modules" \) -exec rm -rf '{}' +
+          find . \( -name "package.json" -o -name "pnpm-lock.yaml" -o -name "yarn.lock" -o -name "postcss.config.js" -o -name ".npmrc" \) -exec rm -rf '{}' +
+          find . \( -name "composer.lock" -o -name "composer.json" -o -name ".wordpress-org" -o -name ".distignore" -o -name ".npmrc" \) -exec rm -rf '{}' +
+
+      - name: Move files to subfolder
+        run: mkdir zip-temp && ls | grep -v zip-temp | xargs mv -t zip-temp
+      
+      - name: Rename folder
+        run: mv zip-temp ancientworks-artifact
+
+      - name: Create zip
+        uses: montudor/action-zip@v0.1.1
+        with:
+          args: zip -qq -r "ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip" . -x  .npmrc
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+
+      - name: Upload zip to release
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip

@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-  <a href="https://ancient.works">Official Website</a> | <a href="https://docs.ancient.works/artifact/">Documentation</a> | <a href="CHANGELOG.md">Change Log</a>
+  <a href="https://ancient.works"> Official Website </a> | <a href="https://docs.ancient.works/artifact/"> Documentation </a> | <a href="CHANGELOG.md"> Change Log </a>
 </p>
 
 ## Supporting
@@ -68,9 +68,15 @@ Those modules typically come bundled with Artifact.
 
 ### Exclusive modules
 
-Those modules available for Artifact's [subscribers](#supporting).
+Those modules available for Artifact's [subscribers](#downloads).
 
 - [`artifact-modules/oxygen-collaboration`](https://github.com/artifact-modules/oxygen-collaboration) Oxygen editor multi user and multi tab editing support.
 - [`artifact-modules/oxygen-classes-purger`](https://github.com/artifact-modules/oxygen-classes-purger) Remove unused oxygen css classes. [WIP]
 - [`artifact-modules/oxygen-copy-paste`](https://github.com/artifact-modules/oxygen-copy-paste) Copy paste element and style on oxygen editor. [WIP]
 - [`artifact-modules/oxygen-move-with-arrow`](https://github.com/artifact-modules/oxygen-move-with-arrow) Move element on oxygen editor using keyboard. [WIP]
+
+
+## Downloads
+
+- [Lite edition](https://github.com/ancientworks/artifact/releases/latest). List of module included in Lite edition release: Please refer to [#default-modules](#default-modules) section
+- [Full edition](https://ancient.works/artifact) List of module included in Full edition release: Please refer to [#exclusive-modules](#exclusive-modules) section
