@@ -29,7 +29,7 @@ class Artifact
             'license'     => get_option(self::$slug . "_license_key"),
             'beta'        => get_option(self::$slug . "_beta"),
             'plugin_file' => ARTIFACT_FILE,
-            'item_id'     => 1,
+            'item_id'     => 9,
             'store_url'   => 'https://ancient.works',
             'author'      => 'ancientworks',
             'is_require_license' => false,

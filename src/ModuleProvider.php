@@ -62,8 +62,11 @@ class ModuleProvider
                 $module->getRealPath()
             );
 
-            if (class_exists($module) && is_subclass_of($module, Module::class)) {
-                array_push(self::$modules, $module);
+            try {
+                if (class_exists($module) && is_subclass_of($module, Module::class)) {
+                    array_push(self::$modules, $module);
+                }
+            } catch (\Throwable $th) {
             }
         }
     }

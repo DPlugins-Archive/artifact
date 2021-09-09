@@ -6,20 +6,16 @@
 
 <p align="center">
   <a href="LICENSE">
-    <img alt="MIT License" src="https://img.shields.io/github/license/ancientworks/artifact?color=%23525ddc&style=flat-square" />
-  </a>
+    <img alt="MIT License" src="https://img.shields.io/github/license/ancientworks/artifact?color=%23525ddc&style=flat-square" /></a>
 
   <a href="https://github.com/ancientworks/artifact/releases/latest">
-    <img alt="Downloads" src="https://img.shields.io/github/downloads/ancientworks/artifact/total?style=flat-square" />
-  </a>
+    <img alt="Downloads" src="https://img.shields.io/github/downloads/ancientworks/artifact/total?style=flat-square" /></a>
 
   <a href="https://github.com/ancientworks/artifact/releases/latest">
-    <img alt="GitHub release" src="https://img.shields.io/github/v/release/ancientworks/artifact.svg?style=flat-square" />
-  </a>
+    <img alt="GitHub release" src="https://img.shields.io/github/v/release/ancientworks/artifact.svg?style=flat-square" /></a>
 
   <a href="https://github.com/ancientworks/artifact/actions">
-    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/ancientworks/artifact/release?style=flat-square" />
-  </a>
+    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/ancientworks/artifact/Release%20-%20Lite%20Edition?style=flat-square" /></a>
 </p>
 
 <p align="center">
@@ -29,7 +25,7 @@
 </p>
 
 <p align="center">
-  <a href="https://ancient.works"> Official Website </a> | <a href="https://docs.ancient.works/artifact/"> Documentation </a> | <a href="CHANGELOG.md"> Change Log </a>
+  <a href="https://ancient.works/artifact"> Official Website </a> | <a href="https://docs.ancient.works/artifact/"> Documentation </a> | <a href="CHANGELOG.md"> Change Log </a>
 </p>
 
 ## Supporting
@@ -78,5 +74,5 @@ Those modules available for Artifact's [subscribers](#downloads).
 
 ## Downloads
 
-- [Lite edition](https://github.com/ancientworks/artifact/releases/latest). List of module included in Lite edition release: Please refer to [#default-modules](#default-modules) section
-- [Full edition](https://ancient.works/artifact) List of module included in Full edition release: Please refer to [#exclusive-modules](#exclusive-modules) section
+- [Lite edition](https://ancient.works/downloads/artifact-lite). List of modules included in Lite edition release: Please refer to [#default-modules](#default-modules) section
+- [Full edition](https://ancient.works/artifact) List of modules included in Full edition release: Please refer to [#exclusive-modules](#exclusive-modules) section

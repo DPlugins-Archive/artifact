@@ -61,14 +61,8 @@ jobs:
         with:
           args: zip -qq -r "ancientworks-artifact-${{ steps.get_version.outputs.VERSION }}.zip" . -x  .npmrc
 
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
 
       - name: Upload zip to release
         uses: actions/upload-release-asset@v1.0.1
