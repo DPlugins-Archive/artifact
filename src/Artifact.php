@@ -2,6 +2,7 @@
 
 namespace AncientWorks\Artifact;
 
+use AncientWorks\Artifact\Utils\DB;
 use AncientWorks\Artifact\Utils\Utils;
 
 /**
@@ -23,11 +24,12 @@ class Artifact
 
         register_activation_hook(ARTIFACT_FILE, [$this, 'plugin_activate']);
         register_deactivation_hook(ARTIFACT_FILE, [$this, 'plugin_deactivate']);
+        // register_uninstall_hook(ARTIFACT_FILE, [$this, 'plugin_uninstall']);
 
         self::$updater = new PluginUpdater(self::$slug, [
             'version'     => self::$version,
-            'license'     => get_option(self::$slug . "_license_key"),
-            'beta'        => get_option(self::$slug . "_beta"),
+            'license'     => Utils::get_option("_license_key"),
+            'beta'        => Utils::get_option("_beta"),
             'plugin_file' => ARTIFACT_FILE,
             'item_id'     => 9,
             'store_url'   => 'https://ancient.works',
@@ -79,5 +81,10 @@ class Artifact
     }
     public function plugin_deactivate()
     {
+    }
+
+    public function plugin_uninstall()
+    {
+        DB::db()->delete(DB::wpdb()->prefix . 'options', ['option_name[~]' => self::$slug . "_%"]);
     }
 }

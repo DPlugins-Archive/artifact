@@ -3,6 +3,7 @@
 namespace AncientWorks\Artifact;
 
 use AncientWorks\Artifact\Utils\Template;
+use AncientWorks\Artifact\Utils\Utils;
 use Composer\Semver\Comparator;
 
 /**
@@ -64,12 +65,12 @@ abstract class Module
 
     public function get_installed_version()
     {
-        return get_option('artifact_installed_module_version_' . static::$module_id);
+        return Utils::get_option('installed_module_version_' . static::$module_id);
     }
 
     public function set_installed_version()
     {
-        return update_option('artifact_installed_module_version_' . static::$module_id, static::$module_version);
+        return Utils::update_option('installed_module_version_' . static::$module_id, static::$module_version);
     }
 
     public function install(): bool

@@ -24,6 +24,21 @@ class Utils
 		return Template::template();
 	}
 
+	public static function get_option($option, $default = false)
+	{
+		return \get_option(Artifact::$slug . '_' . $option, $default);
+	}
+
+	public static function update_option($option, $value, $autoload = null)
+	{
+		return \update_option(Artifact::$slug . '_' . $option, $value);
+	}
+
+	public static function delete_option($option)
+	{
+		return \delete_option(Artifact::$slug . '_' . $option);
+	}
+
 	public static function redirect($location)
 	{
 		if (headers_sent() === false) {

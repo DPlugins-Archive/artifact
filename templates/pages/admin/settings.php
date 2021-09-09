@@ -1,11 +1,12 @@
 <?php
 
 use AncientWorks\Artifact\Artifact;
+use AncientWorks\Artifact\Utils\Utils;
 
 defined('ABSPATH') || exit;
 
-$_license_key = get_option(Artifact::$slug . "_license_key");
-$_beta        = get_option(Artifact::$slug . "_beta");
+$_license_key = Utils::get_option("_license_key");
+$_beta        = Utils::get_option("_beta");
 
 ?>
 

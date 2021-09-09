@@ -47,16 +47,16 @@ class SettingController
 
     protected function handleSaveLicense()
     {
-        update_option(Artifact::$slug . "_beta", sanitize_text_field($_REQUEST['beta'] ?? false));
+        Utils::update_option("_beta", sanitize_text_field($_REQUEST['beta'] ?? false));
 
         $_request_license_key = sanitize_text_field($_REQUEST['license_key']);
 
-        $stored_license = get_option(Artifact::$slug . "_license_key");
+        $stored_license = Utils::get_option("_license_key");
         if ($_request_license_key !== $stored_license) {
             if (empty($_request_license_key)) {
                 if (!empty($stored_license)) {
                     Artifact::$updater->deactivate();
-                    update_option(Artifact::$slug . "_license_key", null);
+                    Utils::update_option("_license_key", null);
 
                     return Notice::success('Plugin license key de-activated successfully');
                 }
@@ -71,7 +71,7 @@ class SettingController
                     if ($license_data->license != 'valid') {
                         return Notice::error(Artifact::$updater::errorMessage($license_data->error));
                     } else {
-                        update_option(Artifact::$slug . "_license_key", $_request_license_key);
+                        Utils::update_option("_license_key", $_request_license_key);
                         return Notice::success('Plugin license key activated successfully');
                     }
                 }

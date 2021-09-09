@@ -2,6 +2,7 @@
 
 namespace AncientWorks\Artifact;
 
+use AncientWorks\Artifact\Utils\Utils;
 use Symfony\Component\Finder\Finder;
 
 /**
@@ -78,22 +79,25 @@ class ModuleProvider
         self::which_enabled();
 
         foreach (self::$modules as $module) {
-            if (class_exists($module)) {
-                $m = new $module;
+            try {
+                if (class_exists($module)) {
+                    $m = new $module;
 
-                if (self::is_enabled($m::$module_id)) {
-                    self::$container[$m::$module_id] = $m;
-                } else {
-                    self::$shadow[$m::$module_id] = $m;
+                    if (self::is_enabled($m::$module_id)) {
+                        self::$container[$m::$module_id] = $m;
+                    } else {
+                        self::$shadow[$m::$module_id] = $m;
+                    }
+
+                    self::$available[$m::$module_id] = [
+                        'enabled' => self::is_enabled($m::$module_id),
+                        'fqcn' => $module,
+                        'version' => $m::$module_version,
+                        'id' => $m::$module_id,
+                        'name' => $m::$module_name,
+                    ];
                 }
-
-                self::$available[$m::$module_id] = [
-                    'enabled' => self::is_enabled($m::$module_id),
-                    'fqcn' => $module,
-                    'version' => $m::$module_version,
-                    'id' => $m::$module_id,
-                    'name' => $m::$module_name,
-                ];
+            } catch (\Throwable $th) {
             }
         }
 
@@ -104,10 +108,10 @@ class ModuleProvider
 
     public static function which_enabled()
     {
-        $modules = get_option('artifact_module_enabled', false);
+        $modules = Utils::get_option('module_enabled', false);
 
         if (false === $modules) {
-            update_option('artifact_module_enabled', []);
+            Utils::update_option('module_enabled', []);
             self::$enabled = [];
         }
 
@@ -131,12 +135,12 @@ class ModuleProvider
     public static function enable_module(string $module_id)
     {
         self::$enabled[$module_id] = true;
-        update_option('artifact_module_enabled', self::$enabled);
+        Utils::update_option('module_enabled', self::$enabled);
     }
 
     public static function disable_module(string $module_id)
     {
         unset(self::$enabled[$module_id]);
-        update_option('artifact_module_enabled', self::$enabled);
+        Utils::update_option('module_enabled', self::$enabled);
     }
 }

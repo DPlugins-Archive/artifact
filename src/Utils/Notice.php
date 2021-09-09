@@ -19,16 +19,16 @@ class Notice
 
     public static function lists()
     {
-        $notices = get_option(Artifact::$slug . '_notices', []);
+        $notices = Utils::get_option('_notices', []);
 
-        update_option(Artifact::$slug . '_notices', []);
+        Utils::update_option('_notices', []);
 
         return $notices;
     }
 
     public static function add($status, $message, $key = false, $learn_more = false)
     {
-        $notices = get_option(Artifact::$slug . '_notices', []);
+        $notices = Utils::get_option('_notices', []);
 
         $payload = [
             'status' => $status,
@@ -45,7 +45,7 @@ class Notice
             $notices[] = $payload;
         }
 
-        update_option(Artifact::$slug . '_notices', $notices);
+        Utils::update_option('_notices', $notices);
     }
 
     public static function adds( $status, $messages ) {

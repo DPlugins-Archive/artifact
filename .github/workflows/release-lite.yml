@@ -17,6 +17,10 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+          
+      - name: Replace product item_id
+        run: |
+          sed -i -e "s/'item_id'     => 9,/'item_id'     => 50,/g" src/Artifact.php
 
       - name: Composer install
         run: composer install --prefer-dist --no-interaction --no-suggest --no-dev
